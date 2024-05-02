@@ -25,4 +25,4 @@ ___
 > * [ ] *Решить, хватит ли моему проекту такого функционала, или мне придется реализовывать постоянное движение змейки с определенной скоростью.*
 
 ___
-![мой тг](https://png.klev.club/uploads/posts/2024-03/png-klev-club-p-ikonka-tg-png-2.png)
+![мой тг](https://pngicon.ru/file/uploads/telegram.png)
