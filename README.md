@@ -25,4 +25,4 @@ ___
 > * [ ] *Решить, хватит ли моему проекту такого функционала, или мне придется реализовывать постоянное движение змейки с определенной скоростью.*
 
 ___
-![мой тг](https://pngicon.ru/file/uploads/telegram.png)](https://t.me/SuperPyDroCh)
+![мой тг][(https://pngicon.ru/file/uploads/telegram.png)](https://t.me/SuperPyDroCh)
