@@ -1,4 +1,4 @@
-# Пока я добавил функцию для движения змейки только вперед и назад.
+# Пока я добавил функцию для движения змейки только вверх и вниз.
 
 # Импортирую все необходимые библиотеки
 import keyboard
@@ -23,52 +23,37 @@ def set_a_game_field():
     except Exception as e:
         print(f'Ошибка: {e}')
 
-# Глобальная переменная для хранения игрового поля
+# Глобальные переменные для хранения игрового поля
+global game_field_list
 global game_field
 game_field = set_a_game_field()
 
 # Первое появление змейки
-game_field1 = list(game_field)
-game_field1[44] = '@'
-game_field1 = ''.join(game_field1)
-print(game_field1)
+game_field_list = list(game_field)
+game_field_list[44] = '@'
+game_field2 = ''.join(game_field_list)
+print(game_field2)
 
 # Движение змейки
 def move_the_snake(direction):
-    global game_field
-    if direction == 'down':
-        game_field1 = list(game_field)
-        # Проверка на наличие препятствий
-        if game_field1[44 + 43] == '‾':
-            clear()
-            print('Game over!')
-        elif game_field1[44 + 43] == '_':
-            clear()
-            print('Game over!')
-        elif game_field1[44 + 43] == '|':
-            clear()
-            print('Game over!')
-        else:
-            game_field1[44 + 43] = '@'
-            game_field1 = ''.join(game_field1)
-            print(game_field1)
-    elif direction == 'up':
-        game_field1 = list(game_field)
-        # Проверка на наличие препятствий
-        if game_field1[44 - 43] == '‾':
-            clear()
-            print('Game over!')
-        elif game_field1[44 - 43] == '_':
-            clear()
-            print('Game over!')
-        elif game_field1[44 - 43] == '|':
-            clear()
-            print('Game over!')
-        else:
-            game_field1[44 - 43] = '@'
-            game_field1 = ''.join(game_field1)
-            print(game_field1)
+    try:
+        global game_field_list
+        listt = game_field_list
+        global game_field
+        index = listt.index('@')
+        if direction == 'up':
+            if listt[index - 43] == ' ':
+                listt[index] = ' '
+                listt[index - 43] = '@'
+        game_fieldd = ''.join(listt)
+    except ValueError:
+        clear()
+        print('Ошибка')
+    except Exception as e:
+        print(e)
+    clear()
+    print(game_fieldd)
+
 
 sleep(1)
-move_the_snake("down")
 move_the_snake("up")
