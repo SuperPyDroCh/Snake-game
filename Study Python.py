@@ -28,12 +28,6 @@ global game_field_list
 global game_field
 game_field = set_a_game_field()
 
-# Первое появление змейки
-game_field_list = list(game_field)
-game_field_list[44] = '@'
-game_field2 = ''.join(game_field_list)
-print(game_field2)
-
 # Движение змейки
 def move_the_snake(direction):
     try:
@@ -54,6 +48,12 @@ def move_the_snake(direction):
     clear()
     print(game_fieldd)
 
+# Первое появление змейки
+game_field_list = list(game_field)
+game_field_list[44] = '@'
+game_field2 = ''.join(game_field_list)
+print(game_field2)
 
-sleep(1)
+
+
 move_the_snake("up")
