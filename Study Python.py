@@ -7,7 +7,12 @@ import random
 
 # Функция для мнимой отчистки экрана:
 def clear():
-    print('\n' * 100)
+    printt('\n' * 100)
+
+# Функция для вывода списка в виде строки:
+def printt(text):
+    for el in text:
+        print(el, end='')
 
 # Функция для создания нового игрового поля:
 def set_a_game_field():
@@ -21,11 +26,10 @@ def set_a_game_field():
         result = (('_' * 42) + '\n') + before_before_the_apple + (before_the_apple + after_the_apple) + after_after_the_apple + (('‾' * 42) + '\n')
         return result
     except Exception as e:
-        print(f'Ошибка: {e}')
+        printt(f'Ошибка: {e}')
 
 # Глобальные переменные для хранения игрового поля
 global game_field_list
-global game_field
 game_field = set_a_game_field()
 
 # Движение змейки
@@ -39,21 +43,20 @@ def move_the_snake(direction):
             if listt[index - 43] == ' ':
                 listt[index] = ' '
                 listt[index - 43] = '@'
-        game_fieldd = ''.join(listt)
     except ValueError:
         clear()
-        print('Ошибка')
+        printt('Ошибка')
     except Exception as e:
-        print(e)
+        printt(e)
     clear()
-    print(game_fieldd)
+    printt(game_field_list)
 
 # Первое появление змейки
 game_field_list = list(game_field)
 game_field_list[44] = '@'
-game_field2 = ''.join(game_field_list)
-print(game_field2)
+printt(game_field_list)
 
 
-
+sleep(1)
 move_the_snake("up")
+printt('Hello, world')
