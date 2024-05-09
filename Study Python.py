@@ -68,7 +68,7 @@ def move_the_snake(direction):
         clear()
         printt('Ошибка')
     except Exception as e:
-        printt(e)
+        printt(f'Ошибка: {e}')
     clear()
     printt(game_field_list)
 
