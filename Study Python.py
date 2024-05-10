@@ -30,7 +30,7 @@ def set_a_game_field():
     except Exception as e:
         printt(f'Ошибка: {e}')
 
-# Глобальные переменные для хранения игрового поля
+# Глобальная переменная для хранения игрового поля
 global game_field_list
 game_field = set_a_game_field()
 
