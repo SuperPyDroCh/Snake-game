@@ -1,5 +1,5 @@
 # Импортирую все необходимые библиотеки:
-import keyboard as key
+from pynput import keyboard
 import time
 from time import sleep
 from sys import exit
@@ -95,11 +95,39 @@ game_field_list[43] = '@'
 printt(game_field_list)
 
 # Тестовая часть
-while True:
-    move('DOWN', 1)
-    move('RIGHT', 19)
-    move('DOWN', 1)
-    move('LEFT', 19)
+# Не оптимизировано:
+# while True:
+#     move('RIGHT', 19)
+#     move('DOWN', 1)
+#     move('LEFT', 19)
+#     move('DOWN', 1)
+
+# Оптимизировано:
+# apple = game_field_list.index('#')
+# apple1 = apple // 42 - 1
+# if apple1 > 0:
+#     move('DOWN', apple1)
+# move('RIGHT', 19)
+# print(apple, apple1)
+
 
 # Распознавание нажатия клавиш
+def on_press(key):
+    try:
+        # Обработка нажатия клавиши
+        if key == keyboard.Key.down:
+            move_the_snake('DOWN')
+        elif key == keyboard.Key.right:
+            move_the_snake('RIGHT')
+        elif key == keyboard.Key.up:
+            move_the_snake('UP')
+        elif key == keyboard.Key.left:
+            move_the_snake('LEFT')
+    except AttributeError:
+        clear()
+
+# Создание слушателя события
+listener = keyboard.Listener(on_press=on_press)
+listener.start()  # Запуск слушателя
+listener.join()  # Удержание основного потока
 
