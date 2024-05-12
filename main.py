@@ -1,36 +1,17 @@
-# Импортирую все необходимые библиотеки
+# Импортирую все необходимые библиотеки:
 import keyboard as key
-import random
 import time
 from time import sleep
 from sys import exit
 import pyfiglet
+# В том числе и функции из func.py:
+from func import clear, printt, set_a_game_field
+
+
 
 # Начало замера времени
 start_time = time.time()
 
-# Функция для мнимой отчистки экрана:
-def clear():
-    printt('\n' * 100)
-
-# Функция для вывода списка в виде строки:
-def printt(text):
-    for el in text:
-        print(el, end='')
-
-# Функция для создания нового игрового поля:
-def set_a_game_field():
-    try:
-        string_numb = random.randint(0, 9)
-        before_before_the_apple = string_numb * ('|' + 39 * ' ' + '|' + '\n')
-        before_the_apple = random.randrange(0, 40, 2)
-        after_the_apple = '#' + (' ' * (38 - before_the_apple) + '|' + '\n')
-        before_the_apple = '|' + ' ' * before_the_apple
-        after_after_the_apple = (9 - string_numb) * ('|' + 39 * ' ' + '|' + '\n')
-        result = (('_' * 41) + '\n') + before_before_the_apple + (before_the_apple + after_the_apple) + after_after_the_apple + (('‾' * 41) + '\n')
-        return result
-    except Exception as e:
-        printt(f'Ошибка: {e}')
 
 # Глобальная переменная для хранения игрового поля
 global game_field_list
@@ -52,6 +33,8 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
+                end_time = time.time()
+                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # DOWN
@@ -63,6 +46,8 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
+                end_time = time.time()
+                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # RIGHT
@@ -74,6 +59,8 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
+                end_time = time.time()
+                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # LEFT
@@ -85,6 +72,8 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
+                end_time = time.time()
+                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
     except ValueError:
         clear()
@@ -106,15 +95,11 @@ game_field_list[43] = '@'
 printt(game_field_list)
 
 # Тестовая часть
-move('DOWN', 1)
-move('RIGHT', 19)
-move('UP', 1)
-move('LEFT', 19)
+while True:
+    move('DOWN', 1)
+    move('RIGHT', 19)
+    move('DOWN', 1)
+    move('LEFT', 19)
 
 # Распознавание нажатия клавиш
 
-
-
-# Окончание замера времени
-end_time = time.time()
-print(f"Всего {end_time - start_time:.2f}!")
