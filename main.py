@@ -1,6 +1,5 @@
 # Импортирую все необходимые библиотеки:
 from pynput import keyboard
-import time
 from time import sleep
 from sys import exit
 import pyfiglet
@@ -8,9 +7,6 @@ import pyfiglet
 from func import clear, printt, set_a_game_field
 
 
-
-# Начало замера времени
-start_time = time.time()
 
 
 # Глобальная переменная для хранения игрового поля
@@ -33,8 +29,6 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
-                end_time = time.time()
-                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # DOWN
@@ -46,8 +40,6 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
-                end_time = time.time()
-                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # RIGHT
@@ -59,8 +51,6 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
-                end_time = time.time()
-                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
 
         # LEFT
@@ -72,8 +62,6 @@ def move_the_snake(direction):
             elif listt[index + step] == '#':
                 clear()
                 print(pyfiglet.figlet_format('You win!'))
-                end_time = time.time()
-                print(f"Всего {end_time - start_time:.2f}!")
                 exit()
     except ValueError:
         clear()
@@ -90,44 +78,52 @@ def move(direction, steps):
         move_the_snake(direction)
 
 # Первое появление змейки
-game_field_list = list(game_field)
-game_field_list[43] = '@'
-printt(game_field_list)
+def show():
+    global game_field_list
+    game_field_list = list(game_field)
+    game_field_list[43] = '@'
+    printt(game_field_list)
 
-# Тестовая часть
-# Не оптимизировано:
-# while True:
-#     move('RIGHT', 19)
-#     move('DOWN', 1)
-#     move('LEFT', 19)
-#     move('DOWN', 1)
+def bot1():
+    global game_field_list
+    # Не оптимизировано:
+    while True:
+        move('RIGHT', 19)
+        move('DOWN', 1)
+        move('LEFT', 19)
+        move('DOWN', 1)
 
-# Оптимизировано:
-# apple = game_field_list.index('#')
-# apple1 = apple // 42 - 1
-# if apple1 > 0:
-#     move('DOWN', apple1)
-# move('RIGHT', 19)
-# print(apple, apple1)
+def bot2():
+    global game_field_list
+    # Оптимизировано:
+    apple = game_field_list.index('#')
+    apple1 = apple // 42 - 1
+    if apple1 > 0:
+        move('DOWN', apple1)
+    move('RIGHT', 19)
+    print(apple, apple1)
+
+def userkeyboard():
+    global game_field_list
+    # Распознавание нажатия клавиш
+    def on_press(key):
+        try:
+            # Обработка нажатия клавиши
+            if key == keyboard.Key.down:
+                move_the_snake('DOWN')
+            elif key == keyboard.Key.right:
+                move_the_snake('RIGHT')
+            elif key == keyboard.Key.up:
+                move_the_snake('UP')
+            elif key == keyboard.Key.left:
+                move_the_snake('LEFT')
+        except AttributeError:
+            clear()
+
+    # Создание слушателя события
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()  # Запуск слушателя
+    listener.join()  # Удержание основного потока
 
 
-# Распознавание нажатия клавиш
-def on_press(key):
-    try:
-        # Обработка нажатия клавиши
-        if key == keyboard.Key.down:
-            move_the_snake('DOWN')
-        elif key == keyboard.Key.right:
-            move_the_snake('RIGHT')
-        elif key == keyboard.Key.up:
-            move_the_snake('UP')
-        elif key == keyboard.Key.left:
-            move_the_snake('LEFT')
-    except AttributeError:
-        clear()
-
-# Создание слушателя события
-listener = keyboard.Listener(on_press=on_press)
-listener.start()  # Запуск слушателя
-listener.join()  # Удержание основного потока
 
